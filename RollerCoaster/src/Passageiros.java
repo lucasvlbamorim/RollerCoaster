@@ -6,7 +6,7 @@ public class Passageiros implements Runnable{
         this.id = id;
         this.montanhaRussa = montanhaRussa;
         new Thread(this, Integer.toString (id)).start();
-        //System.out.println("Passageiro criado Id: "+this.id);
+        System.out.println("Passageiro criado Id: "+this.id);
     }
 
     public void run(){
