@@ -6,12 +6,12 @@ public class Passageiros implements Runnable{
         this.id = id;
         this.montanhaRussa = montanhaRussa;
         new Thread(this, Integer.toString (id)).start();
-        System.out.println("Passageiro criado Id: "+this.id);
+        //System.out.println("Passageiro criado Id: "+this.id);
     }
 
     public void run(){
         try {
-                colocarNaFila();
+                colocarNaFila(); 
             } catch (InterruptedException e) {
                 e.printStackTrace();
         }            
@@ -19,7 +19,7 @@ public class Passageiros implements Runnable{
 
     public synchronized void colocarNaFila() throws InterruptedException{
         Thread.sleep(this.montanhaRussa.getTP());
-        System.out.println("Nome da Thread: "+Thread.currentThread().getName()+" Id: "+this.id);
+        //System.out.println("Nome da Thread: "+Thread.currentThread().getName()+" Id: "+this.id);
     }
     
     public int getId(){

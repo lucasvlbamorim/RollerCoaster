@@ -15,7 +15,7 @@ public class Main {
         }
 
         for (int i =0; i < passageiros.size(); i++){
-            System.out.println(i+" = "+passageiros.get(i)+ ""+passageiros.size());
+            System.out.println(i+" = "+passageiros.get(i));
         }
     }
 }
