@@ -19,7 +19,7 @@ public class Passageiros implements Runnable{
 
     public synchronized void colocarNaFila() throws InterruptedException{
         Thread.sleep(this.montanhaRussa.getTP());
-        //System.out.println("Nome da Thread: "+Thread.currentThread().getName()+" Id: "+this.id);
+        System.out.println("Nome da Thread: "+Thread.currentThread().getName()+" Id: "+this.id);
     }
     
     public int getId(){
