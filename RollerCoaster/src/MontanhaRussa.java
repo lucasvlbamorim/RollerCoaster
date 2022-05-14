@@ -9,8 +9,7 @@ public class MontanhaRussa {
     private int TP_MIN; // Tempo mínimo de chegada dos passageiros à montanha russa
     private int TP_MAX; // Tempo máximo de chegada dos passageiros à montanha russa
     private double TP;
-
-
+ 
     MontanhaRussa(int N, int M, int C, int TE, int TM, int TP_MIN, int TP_MAX) {
         this.N = N;
         this.M = M;
@@ -61,8 +60,8 @@ public class MontanhaRussa {
         return this.TP_MAX;
     }
 
-    public double getTP(){
-        return TP;
+    public long getTP(){
+        return (long) TP;
     }
 
     public void setN(int N){
