@@ -1,5 +1,6 @@
 import java.lang.Math;
-
+import java.util.LinkedList;
+import java.util.Queue;
 public class MontanhaRussa {
     private int N; // Número de passageiros
     private int M; // Número de carros
@@ -9,6 +10,7 @@ public class MontanhaRussa {
     private int TP_MIN; // Tempo mínimo de chegada dos passageiros à montanha russa
     private int TP_MAX; // Tempo máximo de chegada dos passageiros à montanha russa
     private double TP;
+    private Queue<Passageiros> filaPassageiros;
  
     MontanhaRussa(int N, int M, int C, int TE, int TM, int TP_MIN, int TP_MAX) {
         this.N = N;
@@ -19,19 +21,10 @@ public class MontanhaRussa {
         this.TP_MIN = TP_MIN;
         this.TP_MAX = TP_MAX;
         this.setTP();
+        this.filaPassageiros = new LinkedList<>();
     }
     
-    /*private static MontanhaRussa gerarMontanhaRussa1(String s) {
-        int N = 52;
-        int M = 2;
-        int C = 4;
-        int TE = 20;
-        int TM = 2*60;
-        int TP_MIN = 10;
-        int TP_MAX = 30;
-        return new MontanhaRussa(N, M, C, TE, TM, TP_MIN, TP_MAX);
-    }*/
-    
+
     public int getN(){
         return this.N;
     }
@@ -60,8 +53,12 @@ public class MontanhaRussa {
         return this.TP_MAX;
     }
 
+    public Queue<Passageiros> getFilaPassageiro(){
+        return filaPassageiros;
+    }
+
     public long getTP(){
-        return (long) TP;
+        return (long) (Math.random() * (this.TP_MAX - this.TP_MIN) + this.TP_MIN) * 1000; 
     }
 
     public void setN(int N){
