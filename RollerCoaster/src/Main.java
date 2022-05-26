@@ -9,6 +9,7 @@ public class Main {
         long maxTempoFila = 0;
         long mediaTempoFila = 0;
         long totalTempoFila = 0;
+        long totalMovimentoCarro = 0;
         //MontanhaRussa teste1 = new MontanhaRussa(52,2,4,20,2*60,10,30);
         Scanner r = new Scanner(System.in);
 				
@@ -66,8 +67,14 @@ public class Main {
         }
         mediaTempoFila = totalTempoFila/montanhaRussa.getN();
 
-        System.out.println("Tempo minímo da fila: "+minTempoFila+"ms");
-        System.out.println("Tempo máximo da fila: "+maxTempoFila+"ms");
-        System.out.println("Tempo Média da fila: "+mediaTempoFila+"ms");
+
+        System.out.println("Tempo minímo da fila: "+(minTempoFila/1000)+"s");
+        System.out.println("Tempo máximo da fila: "+(maxTempoFila/1000)+"s");
+        System.out.println("Tempo Média da fila: "+(mediaTempoFila/1000)+"s");
+        for(Carro carro : carros){
+            System.out.println("Carro "+carro.id+" tempo movimentado: "+(carro.getTempoCarro()/1000)+"s");
+            totalMovimentoCarro +=  carro.getTempoCarro();
+        }
+        System.out.println("Tempo movimentado: "+(totalMovimentoCarro/1000));
     }
 }

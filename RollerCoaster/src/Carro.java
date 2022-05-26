@@ -4,6 +4,7 @@ import java.util.Queue;
 public class Carro implements Runnable{
 
     int id;
+    private long tempoCarro = 0;
     private MontanhaRussa montanhaRussa;
     private Queue<Passageiros> passageiros; // lista de passageiros que estão no carro
     Thread t;
@@ -50,11 +51,15 @@ public class Carro implements Runnable{
     }
 
     private void noTrilho() {
+        long tempoInicio = 0, tempoFinal = 0;
         try {
             this.montanhaRussa.getControleTrilho().acquire();
-            System.out.println("Carinho "+this.t.getName() + " entrou no trilho.");
+            tempoInicio = System.currentTimeMillis();
+            System.out.println("Carinho "+this.t.getName() + " entrou no trilho."+tempoInicio);
             Thread.sleep((long) montanhaRussa.getTM() * 1000);
-            System.out.println("Carinho "+this.t.getName() + " voltou de viagem.");
+            tempoFinal = System.currentTimeMillis();
+            System.out.println("Carinho "+this.t.getName() + " voltou de viagem."+tempoFinal);
+            tempoCarro += tempoFinal - tempoInicio;
             //plusTotalTimeInRoad(finalRidetime - initalRideTime); (Tempo total da corrida)
             desembarquePassageiros();
         } catch (InterruptedException e) {
@@ -75,6 +80,14 @@ public class Carro implements Runnable{
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    public void setTempoCarro(long tempoCarro){
+        this.tempoCarro = tempoCarro;
+    }
+
+    public long getTempoCarro(){
+        return this.tempoCarro;
     }
 
 
