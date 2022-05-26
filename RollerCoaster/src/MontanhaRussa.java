@@ -1,6 +1,7 @@
 import java.lang.Math;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.concurrent.Semaphore;
 public class MontanhaRussa {
     private int N; // Número de passageiros
     private int M; // Número de carros
@@ -11,6 +12,8 @@ public class MontanhaRussa {
     private int TP_MAX; // Tempo máximo de chegada dos passageiros à montanha russa
     private double TP;
     private Queue<Passageiros> filaPassageiros;
+    private Semaphore entradaCarro;
+    private Semaphore controleTrilho;
  
     MontanhaRussa(int N, int M, int C, int TE, int TM, int TP_MIN, int TP_MAX) {
         this.N = N;
@@ -22,6 +25,8 @@ public class MontanhaRussa {
         this.TP_MAX = TP_MAX;
         this.setTP();
         this.filaPassageiros = new LinkedList<>();
+        this.entradaCarro = new Semaphore(1);
+        this.controleTrilho = new Semaphore(1);
     }
     
 
@@ -61,6 +66,14 @@ public class MontanhaRussa {
         return (long) (Math.random() * (this.TP_MAX - this.TP_MIN) + this.TP_MIN) * 1000; 
     }
 
+    public Semaphore getEntradaCarro(){
+        return this.entradaCarro;
+    }
+    
+    public Semaphore getControleTrilho(){
+        return this.controleTrilho;
+    }
+    
     public void setN(int N){
         this.N = N;
     }

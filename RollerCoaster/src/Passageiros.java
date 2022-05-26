@@ -1,12 +1,14 @@
 import java.util.LinkedList;
-public class Passageiros extends Thread implements Runnable{
+public class Passageiros implements Runnable{
     private int id;
     private MontanhaRussa montanhaRussa;
+    Thread t;
     
     public Passageiros(int id, MontanhaRussa montanhaRussa){
         this.id = id;
         this.montanhaRussa = montanhaRussa;
-        //new Thread(this, Integer.toString (id)).start();
+        t = new Thread(this, Integer.toString (id));
+        //t.start();
         System.out.println("Passageiro criado Id: "+this.id);
     }
 
@@ -21,9 +23,8 @@ public class Passageiros extends Thread implements Runnable{
 
     public synchronized void colocarNaFila() throws InterruptedException{
         Thread.sleep(this.montanhaRussa.getTP());
-        System.out.println(this.montanhaRussa.getTP());
         this.montanhaRussa.getFilaPassageiro().add(this);
-        System.out.println("Entrou na fila: "+Thread.currentThread().getName()+" Id: "+this.id);
+        System.out.println("Entrou na fila: "+t.getName()+" Id: "+this.id);
     }
     
     /*public int getId(){

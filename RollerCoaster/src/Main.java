@@ -12,7 +12,7 @@ public class Main {
         System.out.println("Entre com o número de pessoas no parque: ");
         n = r.nextInt();
         if(n<=0){
-			System.out.println("O n�mero de pessoas deve ser maior que zero.");
+			System.out.println("O número de pessoas deve ser maior que zero.");
 			return;
 		}
         
@@ -23,27 +23,28 @@ public class Main {
 			System.out.println("A quantidade de carro deve ser maior que um.");
 			return;
 		}
-        MontanhaRussa montanhaRussa = new MontanhaRussa(n,m,4,10,2*10,0,5);
+        MontanhaRussa montanhaRussa = new MontanhaRussa(n,m,4,2,2*5,2,3);
         
         LinkedList<Passageiros> passageiros = new LinkedList<Passageiros>();
         LinkedList<Carro> carros = new LinkedList<Carro>();
 
         for (int i = 0; i < montanhaRussa.getN(); i++) {
-            passageiros.add(new Passageiros(i, montanhaRussa));
+            passageiros.add(new Passageiros(i, montanhaRussa)); 
         }
 
         for (int i = 0; i < montanhaRussa.getM(); i++) {
             carros.add(new Carro(i, montanhaRussa));
         }
 
-        for (int i =0; i < passageiros.size(); i++){
-            System.out.println(i+" = "+passageiros.get(i));
-        }
-
         for (Passageiros passageiro : passageiros){
-            passageiro.start();
-            passageiro.join();
+            passageiro.t.start();
+            passageiro.t.join();
         }
-
+       
+        /*for (Carro carro : carros){
+            //carro.t.start();
+            carro.t.join();
+        }*/
+        
     }
 }
