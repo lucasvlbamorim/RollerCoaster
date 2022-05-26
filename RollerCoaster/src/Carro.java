@@ -64,7 +64,7 @@ public class Carro implements Runnable{
         try {
             Thread.sleep((long) montanhaRussa.getTE() * 1000);
             for (Passageiros passageiro : this.passageiros) {
-             System.out.println("O passageiro "+passageiro.t.getName() + " desembarcou do carro " + this.t.getName());
+             System.out.println("O passageiro "+passageiro.t.getName() + " desembarcou do carro " + this.t.getName() );
             }
             this.passageiros.clear();
             //this.montanhaRussa.byeBye();
