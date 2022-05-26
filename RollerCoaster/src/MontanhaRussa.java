@@ -11,6 +11,7 @@ public class MontanhaRussa {
     private int TP_MIN; // Tempo mínimo de chegada dos passageiros à montanha russa
     private int TP_MAX; // Tempo máximo de chegada dos passageiros à montanha russa
     private double TP;
+    private int quantidadePassageiro;
     private Queue<Passageiros> filaPassageiros;
     private Semaphore entradaCarro;
     private Semaphore controleTrilho;
@@ -27,6 +28,7 @@ public class MontanhaRussa {
         this.filaPassageiros = new LinkedList<>();
         this.entradaCarro = new Semaphore(1);
         this.controleTrilho = new Semaphore(1);
+        this.quantidadePassageiro = 0;
     }
     
 
@@ -73,6 +75,10 @@ public class MontanhaRussa {
     public Semaphore getControleTrilho(){
         return this.controleTrilho;
     }
+
+    public int getFinal(){
+        return this.quantidadePassageiro;
+    }
     
     public void setN(int N){
         this.N = N;
@@ -106,6 +112,9 @@ public class MontanhaRussa {
         this.TP = (Math.random() * (this.TP_MAX - this.TP_MIN) + this.TP_MIN) * 1000; 
     }
     
+    public void setFinal(int quantidade){
+        this.quantidadePassageiro += quantidade; 
+    }
 
     public String toString() {
         return "M:" +this.M+
