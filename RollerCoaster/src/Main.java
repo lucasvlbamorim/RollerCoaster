@@ -2,36 +2,42 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Main {
-
+    public static int a,n,m;
     public static void main(String[] args) throws Exception {
-        int n,m;
         long minTempoFila = 0;
         long maxTempoFila = 0;
         long mediaTempoFila = 0;
         long totalTempoFila = 0;
         long totalMovimentoCarro = 0;
-       
-        //MontanhaRussa teste1 = new MontanhaRussa(52,2,4,20,2*60,10,30);
-
         Scanner ler = new Scanner(System.in);
 
-        System.out.println("Entre com o número de pessoas no parque: ");
-        n = ler.nextInt();
+        System.out.println("Opções: 1 para 1 carro\n        2 para 2 carros\n        3 para 3 carros\n        4 para personalizado.");
+        System.out.print("Escolha:");
+        a = ler.nextInt();
 
-        if(n<=0){
-			System.out.println("O número de pessoas deve ser maior que zero.");
-			return;
-		}
+        switch(a){
+            case 1:
+            n = 52;
+            m = 1;
+            break;
+            case 2:
+            n = 52;
+            m = 2;
+            break;
+            case 3:
+            n = 100;
+            m = 3;
+            break;
+            case 4:
+            System.out.print("Entre com o número de pessoas no parque:");
+            n = ler.nextInt();
+            System.out.print("Entre com a quantidade de carros: ");
+            m = ler.nextInt();
+            break;
+        }
         
-        System.out.println("Entre com a quantidade de carros: ");
-        m = ler.nextInt();
+        MontanhaRussa montanhaRussa = new MontanhaRussa(n,m,4,20,120,10,30);
 
-		if(m<=1){
-			System.out.println("A quantidade de carro deve ser maior que um.");
-			return;
-		}
-        MontanhaRussa montanhaRussa = new MontanhaRussa(n,m,4,1,2*30,1,2);
-        
         LinkedList<Passageiros> passageiros = new LinkedList<Passageiros>();
         LinkedList<Carro> carros = new LinkedList<Carro>();
 
@@ -50,7 +56,6 @@ public class Main {
         
 
         for (Carro carro : carros){
-            //carro.t.start();
             carro.t.join();
         }
         
@@ -78,5 +83,6 @@ public class Main {
             totalMovimentoCarro +=  carro.getTempoCarro();
         }
         System.out.println("Tempo movimentado: "+(totalMovimentoCarro/1000));
+        ler.close();
     }
 }

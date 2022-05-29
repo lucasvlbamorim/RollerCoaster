@@ -15,7 +15,7 @@ public class MontanhaRussa {
     private Queue<Passageiros> filaPassageiros;
     private Semaphore entradaCarro;
     private Semaphore controleTrilho;
-    static int fila = 0;
+    public static int fila = 0;
 
     
     MontanhaRussa(int N, int M, int C, int TE, int TM, int TP_MIN, int TP_MAX) {

@@ -7,7 +7,7 @@ public class Carro implements Runnable{
     int fechada;
     private long tempoCarro = 0;
     private MontanhaRussa montanhaRussa;
-    private Queue<Passageiros> passageiros; // lista de passageiros que estão no carro
+    private Queue<Passageiros> passageiros;
    
     Thread t;
 
@@ -37,7 +37,7 @@ public class Carro implements Runnable{
     public void embarcarPassageiros(){
         try{
         this.montanhaRussa.getEntradaCarro().acquire();
-            if(montanhaRussa.fila == montanhaRussa.getN()){
+            if(MontanhaRussa.fila == montanhaRussa.getN()){
                 this.fechada = 1;
             }
 
