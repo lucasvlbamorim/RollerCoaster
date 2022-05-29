@@ -36,7 +36,7 @@ public class Carro implements Runnable{
 
     public void embarcarPassageiros(){
         try{
-        this.montanhaRussa.getEntradaCarro().acquire();
+            this.montanhaRussa.getEntradaCarro().acquire();
             if(MontanhaRussa.fila == montanhaRussa.getN()){
                 this.fechada = 1;
             }
@@ -70,7 +70,7 @@ public class Carro implements Runnable{
             tempoFinal = System.currentTimeMillis();
             System.out.println("Carinho "+this.t.getName() + " voltou de viagem.");
             tempoCarro += tempoFinal - tempoInicio;
-            //plusTotalTimeInRoad(finalRidetime - initalRideTime); (Tempo total da corrida)
+ 
             desembarquePassageiros();
         } catch (InterruptedException e) {
             e.printStackTrace();
