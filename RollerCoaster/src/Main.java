@@ -10,24 +10,27 @@ public class Main {
         long mediaTempoFila = 0;
         long totalTempoFila = 0;
         long totalMovimentoCarro = 0;
+       
         //MontanhaRussa teste1 = new MontanhaRussa(52,2,4,20,2*60,10,30);
-        Scanner r = new Scanner(System.in);
-				
+
+        Scanner ler = new Scanner(System.in);
+
         System.out.println("Entre com o número de pessoas no parque: ");
-        n = r.nextInt();
+        n = ler.nextInt();
+
         if(n<=0){
 			System.out.println("O número de pessoas deve ser maior que zero.");
 			return;
 		}
         
         System.out.println("Entre com a quantidade de carros: ");
-        m = r.nextInt();
+        m = ler.nextInt();
 
 		if(m<=1){
 			System.out.println("A quantidade de carro deve ser maior que um.");
 			return;
 		}
-        MontanhaRussa montanhaRussa = new MontanhaRussa(n,m,4,2,2*5,2,3);
+        MontanhaRussa montanhaRussa = new MontanhaRussa(n,m,4,1,2*30,1,2);
         
         LinkedList<Passageiros> passageiros = new LinkedList<Passageiros>();
         LinkedList<Carro> carros = new LinkedList<Carro>();
@@ -61,16 +64,15 @@ public class Main {
             if(tempo > maxTempoFila){
                 maxTempoFila = tempo;
             }
-
             totalTempoFila += tempo;
-            System.out.println("Passageiro id = "+tempo);
+
         }
         mediaTempoFila = totalTempoFila/montanhaRussa.getN();
-
 
         System.out.println("Tempo minímo da fila: "+(minTempoFila/1000)+"s");
         System.out.println("Tempo máximo da fila: "+(maxTempoFila/1000)+"s");
         System.out.println("Tempo Média da fila: "+(mediaTempoFila/1000)+"s");
+        
         for(Carro carro : carros){
             System.out.println("Carro "+carro.id+" tempo movimentado: "+(carro.getTempoCarro()/1000)+"s");
             totalMovimentoCarro +=  carro.getTempoCarro();

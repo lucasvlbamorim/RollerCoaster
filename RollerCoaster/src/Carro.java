@@ -4,14 +4,17 @@ import java.util.Queue;
 public class Carro implements Runnable{
 
     int id;
+    int fechada;
     private long tempoCarro = 0;
     private MontanhaRussa montanhaRussa;
     private Queue<Passageiros> passageiros; // lista de passageiros que estão no carro
+   
     Thread t;
 
     public Carro(int id, MontanhaRussa montanhaRussa){
         this.id = id;
         this.montanhaRussa = montanhaRussa;
+        this.fechada = 0;
         this.passageiros = new LinkedList<>();
         t = new Thread(this, Integer.toString (id));
         t.start();
@@ -21,7 +24,7 @@ public class Carro implements Runnable{
     public void run(){
         while(true){
             this.embarcarPassageiros();
-            if (this.passageiros.size() == this.montanhaRussa.getC()) {
+            if(this.passageiros.size() == this.montanhaRussa.getC() || !this.passageiros.isEmpty() && this.fechada == 1 && this.passageiros.size() < this.montanhaRussa.getC()){
                 noTrilho();
             }
 
@@ -34,16 +37,23 @@ public class Carro implements Runnable{
     public void embarcarPassageiros(){
         try{
         this.montanhaRussa.getEntradaCarro().acquire();
-            if (!montanhaRussa.getFilaPassageiro().isEmpty() && montanhaRussa.getFilaPassageiro().size() >= montanhaRussa.getC()){
+            if(montanhaRussa.fila == montanhaRussa.getN()){
+                this.fechada = 1;
+            }
+
+            if (!montanhaRussa.getFilaPassageiro().isEmpty() && montanhaRussa.getFilaPassageiro().size() >= montanhaRussa.getC() || !montanhaRussa.getFilaPassageiro().isEmpty() && montanhaRussa.getFilaPassageiro().size() < montanhaRussa.getC() && this.fechada == 1){
                 Thread.sleep((long) montanhaRussa.getTE() * 1000);
-                for (int i = 0; i < montanhaRussa.getC(); i++) {
+                
+                int tamanhoCarro = (this.fechada == 1 && montanhaRussa.getFilaPassageiro().size() < 4? montanhaRussa.getFilaPassageiro().size():montanhaRussa.getC());
+                
+                for (int i = 0; i < tamanhoCarro; i++) {
                    Passageiros passageiro = montanhaRussa.getFilaPassageiro().poll();
                    passageiro.setSaidaPassageiro(System.currentTimeMillis());
                    System.out.println("O passageiro "+passageiro.t.getName() + " embarcou no carro " + this.t.getName());
                    this.passageiros.add(passageiro);
                 }
             }
-        }catch (InterruptedException e) {
+        }catch (InterruptedException e){
             e.printStackTrace();
         }finally{
             this.montanhaRussa.getEntradaCarro().release();
@@ -55,10 +65,10 @@ public class Carro implements Runnable{
         try {
             this.montanhaRussa.getControleTrilho().acquire();
             tempoInicio = System.currentTimeMillis();
-            System.out.println("Carinho "+this.t.getName() + " entrou no trilho."+tempoInicio);
+            System.out.println("Carinho "+this.t.getName() + " entrou no trilho.");
             Thread.sleep((long) montanhaRussa.getTM() * 1000);
             tempoFinal = System.currentTimeMillis();
-            System.out.println("Carinho "+this.t.getName() + " voltou de viagem."+tempoFinal);
+            System.out.println("Carinho "+this.t.getName() + " voltou de viagem.");
             tempoCarro += tempoFinal - tempoInicio;
             //plusTotalTimeInRoad(finalRidetime - initalRideTime); (Tempo total da corrida)
             desembarquePassageiros();
@@ -73,10 +83,10 @@ public class Carro implements Runnable{
         try {
             Thread.sleep((long) montanhaRussa.getTE() * 1000);
             for (Passageiros passageiro : this.passageiros) {
-             System.out.println("O passageiro "+passageiro.t.getName() + " desembarcou do carro " + this.t.getName() );
+                System.out.println("O passageiro "+passageiro.t.getName() + " desembarcou do carro " + this.t.getName() );
             }
+            this.montanhaRussa.setFinal(this.passageiros.size());
             this.passageiros.clear();
-            this.montanhaRussa.setFinal(this.montanhaRussa.getC());
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -89,7 +99,6 @@ public class Carro implements Runnable{
     public long getTempoCarro(){
         return this.tempoCarro;
     }
-
 
 }
 

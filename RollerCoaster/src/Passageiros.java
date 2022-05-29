@@ -29,7 +29,8 @@ public class Passageiros implements Runnable{
         Thread.sleep(this.montanhaRussa.getTP());
         this.setEntradaPassageiro(System.currentTimeMillis());
         this.montanhaRussa.getFilaPassageiro().add(this);
-        System.out.println("Entrou na fila: "+t.getName()+" Id: "+this.id);
+        System.out.println("Entrou na fila: Passageiro "+t.getName());
+        montanhaRussa.fila++;
     }
     
     /*public int getId(){
