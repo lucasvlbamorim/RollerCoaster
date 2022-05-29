@@ -11,8 +11,8 @@ public class Main {
         long totalMovimentoCarro = 0;
         Scanner ler = new Scanner(System.in);
 
-        System.out.println("Opções: 1 para 1 carro\n        2 para 2 carros\n        3 para 3 carros\n        4 para personalizado.");
-        System.out.print("Escolha:");
+        System.out.println("Escolha:[1] para 1 carro e 52 passageiros\n        [2] para 2 carros e 52 passageiros\n        [3] para 3 carros e 100 passageiros\n        [4] carros e passageiros personalizados");
+        System.out.print("Escolha: ");
         a = ler.nextInt();
 
         switch(a){
