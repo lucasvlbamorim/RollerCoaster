@@ -17,22 +17,22 @@ public class Main {
 
         switch(a){
             case 1:
-            n = 52;
-            m = 1;
+                n = 52;
+                m = 1;
             break;
             case 2:
-            n = 52;
-            m = 2;
+                n = 52;
+                m = 2;
             break;
             case 3:
-            n = 100;
-            m = 3;
+                n = 100;
+                m = 3;
             break;
             case 4:
-            System.out.print("Entre com o número de pessoas no parque:");
-            n = ler.nextInt();
-            System.out.print("Entre com a quantidade de carros: ");
-            m = ler.nextInt();
+                System.out.print("Entre com o número de pessoas no parque:");
+                n = ler.nextInt();
+                System.out.print("Entre com a quantidade de carros: ");
+                m = ler.nextInt();
             break;
         }
         
